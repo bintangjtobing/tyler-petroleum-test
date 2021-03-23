@@ -17,3 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// USERS API
+Route::post('/users', 'apiController@addUsers');
+Route::get('/users', 'apiController@getUsers');
+Route::post('/users/{id}', 'apiController@updateUser');
+Route::get('/delete-users/{id}', 'apiController@deleteUsers');

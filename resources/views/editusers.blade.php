@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Test</title>
+    <title>Users update {{$user->name}}</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -13,75 +13,54 @@
 </head>
 
 <body>
-
     <div class="section my-2 mx-5">
         <div class="row">
             <div class="col-lg-6">
-                <form action="/api/users" method="POST">
+                <form action="/api/users/{{$user->id}}" method="POST">
                     @csrf
-                    <h3>Form Registration</h3>
+                    <h3>Form Update User</h3>
                     <div class="form-group">
                         <label>Name</label>
-                        <input type="text" name="name" class="form-control" required>
+                        <input type="text" name="name" value="{{$user->name}}" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label>Address</label>
-                        <textarea name="address" cols="30" rows="10" class="form-control"></textarea>
+                        <textarea name="address" cols="30" rows="10" class="form-control">{{$user->address}}</textarea>
                     </div>
                     <div class="form-group">
                         <label>Phone number</label>
-                        <input type="number" name="phone_number" required class="form-control">
+                        <input type="number" name="phone_number" value="{{$user->phone_number}}" required
+                            class="form-control">
                     </div>
                     <div class="form-group">
                         <label>Email</label>
-                        <input type="email" name="email" required class="form-control">
+                        <input type="email" name="email" value="{{$user->email}}" required class="form-control">
                     </div>
                     <div class="form-group">
                         <label>Gender</label>
                         <select name="gender" class="form-control custom-select">
                             <option value="">Select gender: </option>
-                            <option value="M">Male</option>
-                            <option value="F">Female</option>
+                            <option value="M" @if($user->gender=='M') selected @endif>Male</option>
+                            <option value="F" @if($user->gender=='F') selected @endif>Female</option>
                         </select>
                     </div>
                     <div class="form-check">
-                        <input type="checkbox" name="checked[]" class="form-check-input" id="exampleCheck1" value="1">
-                        <label class="form-check-label" for="exampleCheck1">Check me out 1</label>
+                        <input type="checkbox" name="checked" class="form-check-input" id="exampleCheck1" value="1"
+                            @if(in_array(1, explode(',', $user->check))) checked @endif>
+                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
                     </div>
                     <div class="form-check">
-                        <input type="checkbox" name="checked[]" class="form-check-input" id="exampleCheck1" value="2">
+                        <input type="checkbox" name="checked" class="form-check-input" id="exampleCheck1" value="2"
+                            @if(in_array(2, explode(',', $user->check))) checked @endif>
                         <label class="form-check-label" for="exampleCheck1">Check me out 2</label>
                     </div>
                     <div class="form-check">
-                        <input type="checkbox" name="checked[]" class="form-check-input" id="exampleCheck1" value="3">
+                        <input type="checkbox" name="checked" class="form-check-input" id="exampleCheck1" value="3"
+                            @if(in_array(3, explode(',', $user->check))) checked @endif>
                         <label class="form-check-label" for="exampleCheck1">Check me out 3</label>
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
-            </div>
-            <div class="col-lg-6">
-                <h3>List users</h3>
-                <table>
-                    <thead>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Phone Number</th>
-                        <th>Gender</th>
-                        <th>Action</th>
-                    </thead>
-                    <tbody>
-                        @foreach ( $user as $item)
-                        <tr>
-                            <td>{{$item->name}}</td>
-                            <td>{{$item->email}}</td>
-                            <td>{{$item->phone_number}}</td>
-                            <td>{{$item->gender}}</td>
-                            <td><a href="/edit/users/{{$item->id}}">Edit</a> | <a
-                                    href="/api/delete-users/{{$item->id}}">Delete</a></td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
             </div>
         </div>
     </div>

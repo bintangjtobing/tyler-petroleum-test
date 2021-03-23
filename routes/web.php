@@ -1,5 +1,7 @@
 <?php
 
+use App\personTable;
+use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +16,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $user = personTable::all();
+    return view('welcome', ['user' => $user]);
 });
+Route::get('/edit/users/{id}', function ($id) {
+    $user = personTable::find($id);
+    return view('editusers', ['user' => $user]);
+});
+// Name of the person, address, phone number, email, gender,
+// checkbox
