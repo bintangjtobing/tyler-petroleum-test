@@ -1,7 +1,7 @@
 ### Installation
 1. Clone the repository first
    ```sh
-   git clone https://github.com/bintangjtobing/canopypower-assignment-v2
+   git clone https://github.com/bintangjtobing/tyler-petroleum-test
    ```
 2. Dont forget to set the connection on .env file, change on DB_Connection section
     ```sh
